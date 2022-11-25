@@ -10,6 +10,8 @@ public class Product {
     private String name;
     private int price;
 
+    private int quantity;
+
     public String getName() {
         return name;
     }
@@ -24,5 +26,13 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
