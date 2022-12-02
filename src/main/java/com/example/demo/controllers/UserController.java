@@ -1,10 +1,12 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.User;
-import com.example.demo.entities.UserContainer;
+import com.example.demo.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.List;
 
 /**
  * @author : Mihai-Cristian Popescu
@@ -14,20 +16,16 @@ import javax.websocket.server.PathParam;
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping()
-    public String getAllUsers() {
-        return "OK";
-    }
+    @Autowired
+    private UserRepository userRepository;
 
-    @PutMapping()
-    public User createUser(@RequestBody User user) {
-        return user;
+    @GetMapping()
+    public List<User> getAllUsers(@PathParam("name") String name) {
+        return userRepository.getAllByUsername(name);
     }
 
     @PostMapping()
-    public UserContainer testPost() {
-        final UserContainer userContainer = new UserContainer();
-
-        return userContainer;
+    public void createUser(@RequestBody List<User> user) {
+        userRepository.saveAll(user);
     }
 }
