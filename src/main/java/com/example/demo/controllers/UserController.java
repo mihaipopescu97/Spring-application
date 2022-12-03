@@ -20,12 +20,12 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping()
-    public List<User> getAllUsers(@PathParam("name") String name) {
-        return userRepository.getAllByUsername(name);
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @PostMapping()
-    public void createUser(@RequestBody List<User> user) {
-        userRepository.saveAll(user);
+    public void createUser(@RequestBody User user) {
+        userRepository.save(user);
     }
 }
